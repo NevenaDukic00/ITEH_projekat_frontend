@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../css/login.css';
-
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
   
@@ -10,6 +10,7 @@ function Register() {
     password:""
   }); 
 
+  let navigate = useNavigate();
   
   function handleInput(e){
     console.log(e);
@@ -19,25 +20,20 @@ function Register() {
     setUserData(newUserData);
   }
 
-  function handleLogin(e){
-    console.log("USAo u login");
+  function handleRegister(e){
     e.preventDefault();
-    axios.post("http://127.0.0.1:8000/api/login",userDate)
+    axios.post("api/register",userDate)
     .then((res)=>{
-      console.log(res.data.success);
-      if(res.data.success=='true'){
-        console.log("Usao u true");
-        window.sessionStorage.setItem("auth_token",res.data.access_token);
-      }
-
+      console.log(res.data);
+      navigate("/login");
     })
     .catch((e)=>{console.log(e);});
-    console.log("Prosao no gore");
+    
   }
 
     return (
       <div className="Auth-form-container">
-      <form className="Auth-form" onSubmit={handleLogin}>
+      <form className="Auth-form" onSubmit={handleRegister}>
         <div className="Auth-form-content">
           <h3 className="Auth-form-title">Sign In</h3>
           <div className="form-group mt-3">
@@ -63,7 +59,7 @@ function Register() {
           <div className="form-group mt-3">
             <label>FirstName</label>
             <input
-              type="firstname"
+              type="firstName"
               className="form-control mt-1"
               placeholder="Enter first name"
               name = "firstName"
@@ -82,7 +78,7 @@ function Register() {
           </div>
           <div className="d-grid gap-2 mt-3">
             <button type="submit" className="btn btn-primary">
-              Submit
+              Register
             </button>
           </div>
           
