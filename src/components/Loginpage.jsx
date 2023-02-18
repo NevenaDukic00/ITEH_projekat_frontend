@@ -68,7 +68,7 @@ function Loginpage() {
             </button>
           </div>
           <p className="forgot-password text-right mt-2">
-          Aren't register yet? <a href="#">REGISTER</a>
+          Aren't register yet? <a href="/register">REGISTER</a>
           </p>
         </div>
       </form>
