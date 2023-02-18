@@ -1,7 +1,34 @@
 import React from 'react'
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
-function NavBar() {
+function NavBar({token}) {
+
+  function handleLogout(){
+    var config = {
+      method: 'post',
+      url: 'api/logout',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer' + token, 
+      },
+      
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log("Izloguj se!");
+
+      window.sessionStorage.setItem("auth_token",null);
+    })
+    .catch(function (error) {
+      console.log("Usao u gresku!");
+      if (error.response.status === 401) {
+        window.sessionStorage.setItem("auth_token",null);
+      }
+    });
+    
+  }
     return (
       <nav className="navbar navbar-expand-xl navbar-light bg-light">
       <div className="container-fluid">
@@ -14,8 +41,14 @@ function NavBar() {
             <li className="nav-item">
               <a className="nav-link active" aria-current="page" href="#">Home</a>
             </li>
+            {token==null?  <li className="nav-item">
+              <a className="nav-link" href="/login">Log in</a>
+            </li>: <li className="nav-item">
+              <a className="nav-link" href="#" onClick={handleLogout}>Log out</a>
+            </li>}
+           
             <li className="nav-item">
-              <a className="nav-link" href="#">Link</a>
+              <a className="nav-link" href="#">Register</a>
             </li>
           </ul>
           <form className="d-flex">
