@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import { Outlet } from 'react-router-dom';
 
 function NavBar({token}) {
 
@@ -30,6 +31,7 @@ function NavBar({token}) {
     
   }
     return (
+      <div>
       <nav className="navbar navbar-expand-xl navbar-light bg-light">
       <div className="container-fluid">
         <a className="navbar-brand" href="#">Welcome</a>
@@ -39,7 +41,7 @@ function NavBar({token}) {
         <div className="collapse navbar-collapse show" id="navbarBasic">
           <ul className="navbar-nav me-auto mb-2 mb-xl-0">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">Home</a>
+              <a className="nav-link active" aria-current="page" href="/books">Home</a>
             </li>
             {token==null?  <li className="nav-item">
               <a className="nav-link" href="/login">Log in</a>
@@ -48,7 +50,7 @@ function NavBar({token}) {
             </li>}
            
             <li className="nav-item">
-              <a className="nav-link" href="#">Register</a>
+              <a className="nav-link" href="/register">Register</a>
             </li>
           </ul>
           <form className="d-flex">
@@ -58,6 +60,8 @@ function NavBar({token}) {
         </div>
       </div>
     </nav>
+    <Outlet/>
+    </div>
       );
 }
 
