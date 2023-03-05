@@ -32,7 +32,7 @@ function App() {
          setBook(res.data.data);
          console.log("Books: " + booksProducts);
          setProducts(res.data.data);
-         setNumProducts(numProducts+1);
+         
          
        })
        .catch((e)=>{console.log(e);},[booksProducts]);

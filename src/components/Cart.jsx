@@ -9,6 +9,7 @@ function Cart({cartProducts,numProducts}) {
  
   
 
+  console.log("U korpi: " + numProducts);
   function totalPrice(){
     var price = 0;
     cartProducts.forEach((product) => {

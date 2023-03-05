@@ -3,14 +3,21 @@ import $ from 'jquery'
 import jquery from 'jquery'
 import { Form } from 'react-router-dom';
 import '../css/form.css';
+import jsPDF from 'jspdf'
 function FormMy({totalPrice, numProducts}) {
 
     
     
+  function generatePDF(data) {
+    var doc = new jsPDF('p', 'pt');
+    
+    doc.text(20, 20, data)
+    doc.addFont('helvetica', 'normal')     
+    
+    doc.save('demo.pdf')
+  }   
   console.log("Total price je: " + totalPrice);
   jquery(function () {
-   
-
     $("#form").on("submit", function (e) {
       e.preventDefault();
       if (
@@ -19,23 +26,37 @@ function FormMy({totalPrice, numProducts}) {
         $("#email").val() &&
         $("#address").val()
       ) {
-        
-        alert(
-          "<Shipping details>" +
-            "\nFirstname: " +
-            $("#firstname").val() +
-            "\nLastname: " +
-            $("#lastname").val() +
-            "\nEmail: " +
-            $("#email").val() +
-            "\nAddress: " +
-            $("#address").val() +
-            "\nTotal price: " +
-            totalPrice() +
-            "$" +
-            "\nTotal number of products: " +
-            numProducts
-        );
+        let data =  "Vasa narudzbina je uspesno primljena!\n<Shipping details>" +
+        "\nFirstname: " +
+        $("#firstname").val() +
+        "\nLastname: " +
+        $("#lastname").val() +
+        "\nEmail: " +
+        $("#email").val() +
+        "\nAddress: " +
+        $("#address").val() +
+        "\nTotal price: " +
+        totalPrice() +
+        "$" +
+        "\nTotal number of products: " +
+        numProducts;
+        generatePDF(data);
+        // alert(
+          // "<Shipping details>" +
+          //   "\nFirstname: " +
+          //   $("#firstname").val() +
+          //   "\nLastname: " +
+          //   $("#lastname").val() +
+          //   "\nEmail: " +
+          //   $("#email").val() +
+          //   "\nAddress: " +
+          //   $("#address").val() +
+          //   "\nTotal price: " +
+          //   totalPrice() +
+          //   "$" +
+          //   "\nTotal number of products: " +
+          //   numProducts
+        // );
       } else {
         alert("All fields are required!");
       }
