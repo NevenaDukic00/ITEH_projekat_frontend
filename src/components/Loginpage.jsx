@@ -3,7 +3,7 @@ import axios from 'axios';
 import '../css/login.css';
 import { useNavigate } from 'react-router-dom';
 
-function Loginpage({addToken}) {
+function Loginpage({addToken,addUser}) {
   
   const[userDate,setUserData] = useState({
     email: "",
@@ -28,9 +28,11 @@ function Loginpage({addToken}) {
     .then((res)=>{
       console.log(res.data.success);
       if(res.data.success==='true'){
-        console.log("Usao u true");
+        console.log("Usao u true" + res.data.data);
         window.sessionStorage.setItem("auth_token",res.data.access_token);
+        console.log(res);
         addToken(res.data.access_token);
+        addUser(res.data.user);
         navigate("/");
       }
 

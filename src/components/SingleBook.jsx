@@ -3,6 +3,7 @@ import '../css/singleBook.css';
 import { BsPlusLg, BsDashLg} from "react-icons/bs";
 function SingleBook({book,flag,addToCart,removeFromCart}) {
 
+  console.log(book);
   
   return (
 
@@ -11,6 +12,7 @@ function SingleBook({book,flag,addToCart,removeFromCart}) {
 
 <div className="card bg-transparent border-0">
   <div className="row g-0">
+    
     <div className="col-5 col-sm-4">
       <img src={book.url} className="img-fluid w-100" alt="card-horizontal-image"/>
     </div>

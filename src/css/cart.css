@@ -8,9 +8,24 @@
     padding: 10px;
     font-size: 7em;;
   }
-
-  .products{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+  *{
+    margin: 0;
+    padding: 0;
   }
+  
+  html{
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgb(149, 74, 123) 0%, rgb(116, 58, 113) 25%, rgb(126, 38, 101) 35%, rgb(173, 132, 171) 49%, rgb(208, 125, 215) 81%, rgb(139, 52, 112) 100%);
+  }
+
+  .cart{
+
+    display: grid;
+   
+    grid-template-columns: 500px 500px 500px;
+    justify-content: center; 
+    background: linear-gradient(90deg, rgb(149, 74, 123) 0%, rgb(116, 58, 113) 25%, rgb(126, 38, 101) 35%, rgb(173, 132, 171) 49%, rgb(208, 125, 215) 81%, rgb(139, 52, 112) 100%);
+
+  }
+
+  

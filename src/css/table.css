@@ -1,0 +1,5 @@
+.table{
+    background: transparent;
+    margin-top: 20px;
+    background: linear-gradient(90deg, rgb(149, 74, 123) 0%, rgb(116, 58, 113) 25%, rgb(126, 38, 101) 35%, rgb(173, 132, 171) 49%, rgb(208, 125, 215) 81%, rgb(139, 52, 112) 100%);
+  }
