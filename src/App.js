@@ -8,7 +8,7 @@ import Books from './components/Books';
 import Cart from './components/Cart';
 import { useEffect } from 'react';
 import Addbook from './components/Addbook';
-
+import axios from 'axios';
 
 function App() {
 
@@ -18,14 +18,26 @@ function App() {
   const [cartProducts, setCartProducts] = useState([]);
   const [numProducts, setNumProducts] = useState(0);
 
-  const[booksProducts,setBook] = useState([]);
-  const[flag,setFlag]= useState(0);
+  const[booksProducts,setBook] = useState();
+ 
 
   useEffect(()=>{
     
-    console.log("U App.js je : " + user);
-  });
-
+    console.log("Books je: " + booksProducts);
+     if(booksProducts==null){
+       console.log("Odlazi po knjige!");
+       axios.get("api/books")
+       .then((res)=>{
+         console.log(res.data);
+         setBook(res.data.data);
+         console.log("Books: " + booksProducts);
+         setProducts(res.data.data);
+         setNumProducts(numProducts+1);
+         
+       })
+       .catch((e)=>{console.log(e);},[booksProducts]);
+     }
+   });
   
 
   function addToken(auth_token){
@@ -45,14 +57,11 @@ function App() {
   }
   
   function setProducts(books){
-    if(flag===0){
-
-    
     console.log("Ulazi da doda knjige");
     setBook(books);
     console.log(books);
-    setFlag(1);
-    }
+    
+    
     
   }
 
@@ -95,7 +104,7 @@ function App() {
           path="/"
           element={
             <Books
-            setProducts={setProducts}
+            books = {booksProducts}
             addToCart = {addToCart}
             removeFromCart = {removeFromCart}
             
@@ -108,7 +117,9 @@ function App() {
         <Route
           path="/cart"
           element={
-            <Cart cartProducts={cartProducts} />
+            <Cart 
+            cartProducts={cartProducts} 
+            numProducts = {numProducts}/>
           }
         />
 

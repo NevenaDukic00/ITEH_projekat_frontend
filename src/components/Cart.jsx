@@ -2,8 +2,23 @@ import React from 'react'
  import '../css/cart.css';
 import Table from './Table';
 import '../css/table.css';
-function Cart({cartProducts}) {
+import FormMy from './FormMy';
+import { useState } from 'react';
+import { useEffect } from 'react';
+function Cart({cartProducts,numProducts}) {
  
+  
+
+  function totalPrice(){
+    var price = 0;
+    cartProducts.forEach((product) => {
+      price = price + product.price*product.amount;
+
+    })
+    return price;
+  };
+  
+  
  
   if (cartProducts == null) {
     return (
@@ -13,8 +28,16 @@ function Cart({cartProducts}) {
     );
   } else {
     return (
+      <div className='cart'>
       <div className='table'>
       <Table cartProducts = {cartProducts}></Table>
+      </div>
+      <div className='form'> 
+      <FormMy
+            numProducts={numProducts}
+            totalPrice = {totalPrice}
+           />
+      </div>
       </div>
   );
 }

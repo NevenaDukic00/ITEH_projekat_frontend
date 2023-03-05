@@ -6,26 +6,10 @@ import { useEffect } from 'react';
 import '../css/books.css';
 import { useState } from 'react';
 
-function Books({setProducts,addToCart,removeFromCart}) {
+function Books({books,addToCart,removeFromCart}) {
 
-  const[books,setBook] = useState();
   
-  useEffect(()=>{
-    
-   console.log("Books je: " + books);
-    if(books==null){
-      console.log("Odlazi po knjige!");
-      axios.get("api/books")
-      .then((res)=>{
-        console.log(res.data);
-        setBook(res.data.data);
-        console.log("Books: " + books);
-        setProducts(res.data.data);
-        
-      })
-      .catch((e)=>{console.log(e);},[books]);
-    }
-  });
+
 
 
    
