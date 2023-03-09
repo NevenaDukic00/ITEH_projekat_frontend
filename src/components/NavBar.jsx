@@ -1,99 +1,141 @@
-import React from 'react'
+import React from "react";
 import { Link } from "react-router-dom";
-import axios from 'axios';
-import { Outlet } from 'react-router-dom';
-import { useState } from 'react';
+import axios from "axios";
+import { Outlet } from "react-router-dom";
+import { useState } from "react";
 
+function NavBar({ token, flag }) {
+  const [logout, setLogout] = useState(1);
 
-function NavBar({token,flag}) {
-
-  const[logout,setLogout] = useState(1);
-
-  function handleLogout(){
+  function handleLogout() {
     var config = {
-      method: 'post',
-      url: 'api/logout',
-      headers: { 
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer' + token, 
+      method: "post",
+      url: "api/logout",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer" + token,
       },
-      
     };
-    
-    axios(config)
-    .then(function (response) {
-      console.log("Izloguj se!");
 
-      window.sessionStorage.setItem("auth_token",null);
-    })
-    .catch(function (error) {
-      console.log("Usao u gresku!");
-      if (error.response.status === 401) {
-        console.log("Usao u if 401");
-        window.sessionStorage.setItem("auth_token",null);
-        setLogout(2);
-      }
-    });
-    
+    axios(config)
+      .then(function (response) {
+        console.log("Izloguj se!");
+
+        window.sessionStorage.setItem("auth_token", null);
+      })
+      .catch(function (error) {
+        console.log("Usao u gresku!");
+        if (error.response.status === 401) {
+          console.log("Usao u if 401");
+          window.sessionStorage.setItem("auth_token", null);
+          setLogout(2);
+        }
+      });
   }
 
-  if(flag!==undefined){
+  if (flag !== undefined) {
     return (
       <div>
-      <nav className="navbar navbar-expand-xl navbar-light bg-light">
-      <div className="container-fluid">
-        <a className="navbar-brand" href="#">Welcome</a>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarBasic" aria-controls="navbarBasic" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse show" id="navbarBasic">
-          <ul className="navbar-nav me-auto mb-2 mb-xl-0">
-            <li className="nav-item">
-            <Link className="nav-link" to="/">Home</Link>
-              {/* <a className="nav-link active" aria-current="page" href="/">Home</a> */}
-            </li>
-            {token==null || logout==2?  <li className="nav-item">
-            <Link className="nav-link" to="/login">Log in</Link>
-              {/* <a className="nav-link" href="/login">Log in</a> */}
-            </li>: <li className="nav-item">
-              <a className="nav-link" href="#" onClick={handleLogout}>Log out</a>
-            </li>}
+        <nav className="navbar navbar-expand-xl navbar-light bg-light">
+          <div className="container-fluid">
+            <a className="navbar-brand" href="#">
+              Welcome
+            </a>
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarBasic"
+              aria-controls="navbarBasic"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse show" id="navbarBasic">
+              <ul className="navbar-nav me-auto mb-2 mb-xl-0">
+                <li className="nav-item">
+                  <Link className="nav-link" to="/">
+                    Home
+                  </Link>
+                  {/* <a className="nav-link active" aria-current="page" href="/">Home</a> */}
+                </li>
+                {token == null || logout == 2 ? (
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/login">
+                      Log in
+                    </Link>
+                    {/* <a className="nav-link" href="/login">Log in</a> */}
+                  </li>
+                ) : (
+                  <li className="nav-item">
+                    <a className="nav-link" href="#" onClick={handleLogout}>
+                      Log out
+                    </a>
+                  </li>
+                )}
 
-            {flag===1 || flag.email!=="admin@gmail.com" ?<li className="nav-item">
-            <Link className="nav-link" to="/register">Register</Link>
-              {/* <a className="nav-link" href="/register">Register</a> */}
-            </li>:<></>}
-            
-            {flag===1 || flag.email!=="admin@gmail.com"?
-            <li className="nav-item">
-              <Link className="nav-link" to="/cart">Cart</Link>
-              {/* <a className="nav-link" href="/cart">Cart</a> */}
-            </li> :<></>}
-            {console.log(flag.email + "===" + "admin@gmail.com")}
-            {flag.email==="admin@gmail.com"?
-            <li className="nav-item">
-               <Link className="nav-link" to="/addbook">Add book</Link>
-             {/* <a className="nav-link" href="/addbook">Add book</a> */}
-           </li>:<></>}
-             {flag.email==="admin@gmail.com"?
-           <li className="nav-item">
-              <Link className="nav-link" to="/addbook">Update book</Link>
-             {/* <a className="nav-link" href="/updateBook">Update book</a> */}
-           </li>:<></>}
-           
-          </ul>
-          {/* <form className="d-flex">
+                {flag === 1 || flag.email !== "admin@gmail.com" ? (
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/register">
+                      Register
+                    </Link>
+                    {/* <a className="nav-link" href="/register">Register</a> */}
+                  </li>
+                ) : (
+                  <></>
+                )}
+
+                {flag === 1 || flag.email !== "admin@gmail.com" ? (
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/cart">
+                      Cart
+                    </Link>
+                    {/* <a className="nav-link" href="/cart">Cart</a> */}
+                  </li>
+                ) : (
+                  <></>
+                )}
+                {console.log(flag.email + "===" + "admin@gmail.com")}
+                {flag.email === "admin@gmail.com" ? (
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/addbook">
+                      Add book
+                    </Link>
+                    {/* <a className="nav-link" href="/addbook">Add book</a> */}
+                  </li>
+                ) : (
+                  <></>
+                )}
+                {flag.email === "admin@gmail.com" ? (
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/addbook">
+                      Update book
+                    </Link>
+                    {/* <a className="nav-link" href="/updateBook">Update book</a> */}
+                  </li>
+                ) : (
+                  <></>
+                )}
+                <li className="nav-item">
+                  <Link className="nav-link" to="/information">
+                    About us
+                  </Link>
+                  {/* <a className="nav-link" href="/cart">Cart</a> */}
+                </li>
+              </ul>
+              {/* <form className="d-flex">
             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"></input>
             <button className="btn btn-outline-success" type="submit">Search</button>
           </form> */}
-        </div>
+            </div>
+          </div>
+        </nav>
+        <Outlet />
       </div>
-    </nav>
-    <Outlet/>
-    </div>
-      );
-    }
-     return (<></>);
+    );
+  }
+  return <></>;
 }
 
-export default NavBar
+export default NavBar;

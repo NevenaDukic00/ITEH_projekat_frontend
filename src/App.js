@@ -8,6 +8,8 @@ import Books from './components/Books';
 import Cart from './components/Cart';
 import { useEffect } from 'react';
 import Addbook from './components/Addbook';
+import Information from './components/Information';
+import {images} from './images/gallery-image';
 import axios from 'axios';
 
 function App() {
@@ -124,6 +126,13 @@ function App() {
         />
 
        <Route path='/addbook' element={user && <Addbook user = {user}/>}></Route>
+       <Route
+          path="/information"
+          element={
+            <Information items={images}/>
+            
+          }
+        />
        
       </Routes>
       
