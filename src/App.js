@@ -28,7 +28,7 @@ function App() {
     console.log("Books je: " + booksProducts);
      if(booksProducts==null){
        console.log("Odlazi po knjige!");
-       axios.get("api/books")
+       axios.get("http://127.0.0.1:8000/api/books")
        .then((res)=>{
          console.log(res.data);
          setBook(res.data.data);
@@ -96,11 +96,15 @@ function App() {
       });
     }
 
+    function setToken1(){
+      setToken(null);
+    }
   
+
   return (
     <div className="App">
       <BrowserRouter className="App">
-      <NavBar  token = {token}  flag = {user===undefined? 1:user}/>
+      <NavBar  token = {token}  flag = {user===undefined? 1:user} setToken={setToken1}/>
       <Routes>
         <Route
           path="/"
@@ -121,7 +125,8 @@ function App() {
           element={
             <Cart 
             cartProducts={cartProducts} 
-            numProducts = {numProducts}/>
+            numProducts = {numProducts}
+            token={token}/>
           }
         />
 

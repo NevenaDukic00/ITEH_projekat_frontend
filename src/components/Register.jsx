@@ -7,7 +7,9 @@ function Register() {
   
   const[userDate,setUserData] = useState({
     email: "",
-    password:""
+    password:"",
+    firstName:"",
+    lastName:""
   }); 
 
   let navigate = useNavigate();
@@ -22,12 +24,13 @@ function Register() {
 
   function handleRegister(e){
     e.preventDefault();
-    axios.post("api/register",userDate)
+    axios.post("http://127.0.0.1:8000/api/register",userDate)
     .then((res)=>{
+      alert("You have been successfully registered!");
       console.log(res.data);
       navigate("/login");
     })
-    .catch((e)=>{console.log(e);});
+    .catch((e)=>{  alert("User with entered username already exsist!");console.log(e);});
     
   }
 

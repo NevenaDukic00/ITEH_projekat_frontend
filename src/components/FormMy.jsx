@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import $ from 'jquery'
 import jquery from 'jquery'
 import { Form } from 'react-router-dom';
 import '../css/form.css';
 import jsPDF from 'jspdf'
-function FormMy({totalPrice, numProducts}) {
+function FormMy({totalPrice, numProducts,token}) {
 
-    
-    
+  console.log(token);
+  const[t,setToken] = useState(token);
+ 
   function generatePDF(data) {
     var doc = new jsPDF('p', 'pt');
     
@@ -74,6 +75,7 @@ function FormMy({totalPrice, numProducts}) {
         placeholder="Enter firstname"
         name="firstname"
         id="firstname"
+        disabled={t===null? true:false}
       ></input>
 
       <label htmlFor="lastname">Lastname:</label>
@@ -81,7 +83,8 @@ function FormMy({totalPrice, numProducts}) {
         type="text"
         placeholder="Enter lastname"
         name="lastname"
-        id="lastname"
+        id="lastname"   
+        disabled={t==null? true:false}
       ></input>
 
       <label htmlFor="email">Email:</label>
@@ -90,6 +93,7 @@ function FormMy({totalPrice, numProducts}) {
         placeholder="Enter email"
         name="email"
         id="email"
+        disabled={t==null? true:false}
       ></input>
 
       <label htmlFor="address">Address:</label>
@@ -98,6 +102,7 @@ function FormMy({totalPrice, numProducts}) {
         placeholder="Enter address"
         name="address"
         id="address"
+        disabled={t==null? true:false}
       ></input>
       <div className='price'>Total amount: {numProducts}</div>
       <div className='individualTotal'>Total price: {totalPrice()}</div>

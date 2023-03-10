@@ -4,13 +4,13 @@ import axios from "axios";
 import { Outlet } from "react-router-dom";
 import { useState } from "react";
 
-function NavBar({ token, flag }) {
+function NavBar({ token, flag, setToken}) {
   const [logout, setLogout] = useState(1);
 
   function handleLogout() {
     var config = {
       method: "post",
-      url: "api/logout",
+      url: "http://127.0.0.1:8000/api/logout",
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer" + token,
@@ -28,7 +28,7 @@ function NavBar({ token, flag }) {
         if (error.response.status === 401) {
           console.log("Usao u if 401");
           window.sessionStorage.setItem("auth_token", null);
-          setLogout(2);
+          setToken(null);
         }
       });
   }
@@ -60,7 +60,7 @@ function NavBar({ token, flag }) {
                   </Link>
                   {/* <a className="nav-link active" aria-current="page" href="/">Home</a> */}
                 </li>
-                {token == null || logout == 2 ? (
+                {token == null ? (
                   <li className="nav-item">
                     <Link className="nav-link" to="/login">
                       Log in
@@ -69,9 +69,10 @@ function NavBar({ token, flag }) {
                   </li>
                 ) : (
                   <li className="nav-item">
-                    <a className="nav-link" href="#" onClick={handleLogout}>
-                      Log out
-                    </a>
+                    <Link className="nav-link" to="#" onClick={handleLogout}> Log out</Link>
+                    {/* <a className="nav-link" href="#" onClick={handleLogout}> */}
+                     
+                    {/* </a> */}
                   </li>
                 )}
 

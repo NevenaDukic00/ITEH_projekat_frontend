@@ -5,7 +5,7 @@ import '../css/table.css';
 import FormMy from './FormMy';
 import { useState } from 'react';
 import { useEffect } from 'react';
-function Cart({cartProducts,numProducts}) {
+function Cart({cartProducts,numProducts,token}) {
  
   
 
@@ -37,6 +37,7 @@ function Cart({cartProducts,numProducts}) {
       <FormMy
             numProducts={numProducts}
             totalPrice = {totalPrice}
+            token={token}
            />
       </div>
       </div>
