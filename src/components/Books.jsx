@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import "../css/books.css";
 import { useState } from "react";
 
-function Books({ books, addToCart, removeFromCart }) {
+function Books({ books, addToCart, removeFromCart,deleteBook,user }) {
   return (
     <div className="homepage">
       {books == null ? (
@@ -19,6 +19,8 @@ function Books({ books, addToCart, removeFromCart }) {
             key={book.id}
             addToCart={addToCart}
             removeFromCart={removeFromCart}
+            deleteBook={deleteBook}
+            user={user}
           />
         ))
       )}

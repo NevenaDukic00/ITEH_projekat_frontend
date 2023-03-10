@@ -1,7 +1,7 @@
 import React from 'react'
 import '../css/singleBook.css';
-import { BsPlusLg, BsDashLg} from "react-icons/bs";
-function SingleBook({book,flag,addToCart,removeFromCart}) {
+import { BsPlusLg, BsDashLg,BsXCircle} from "react-icons/bs";
+function SingleBook({book,flag,addToCart,removeFromCart,deleteBook,user}) {
 
   console.log(book);
   
@@ -36,13 +36,16 @@ function SingleBook({book,flag,addToCart,removeFromCart}) {
 <div className='buttons'>
     {flag===1? <>
       <div className='b' onClick={() => addToCart(book.id)}>
-    
     <BsPlusLg/>
     </div>
     
     <div className='b' onClick={() => removeFromCart(book.id)}>
     <BsDashLg/>
     </div>
+    {user!=undefined && user.email==="admin@gmail.com"? <div className='b' onClick={() => deleteBook(book.id)}>
+    <BsXCircle/>
+    </div>:<></>}
+   
     </>:<></>}
 
     

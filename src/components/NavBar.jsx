@@ -6,14 +6,14 @@ import { useState } from "react";
 
 function NavBar({ token, flag, setToken}) {
   const [logout, setLogout] = useState(1);
-
+  
   function handleLogout() {
     var config = {
       method: "post",
       url: "http://127.0.0.1:8000/api/logout",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer" + token,
+        Authorization: `Bearer ${token}`,
       },
     };
 

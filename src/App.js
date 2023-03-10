@@ -96,8 +96,42 @@ function App() {
       });
     }
 
+    function deleteBook(bookID){
+      var config = {
+        method: 'delete',
+      maxBodyLength: Infinity,
+        url: 'http://127.0.0.1:8000/api/books/' + bookID,
+        headers: { 
+          'Authorization': `Bearer ${token}`,
+        },
+        
+      };
+      
+      axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        setBook((current) =>
+        booksProducts.filter((book) => book.id !== bookID)
+    );
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      // console.log("Odlazi po knjige!");
+      //  axios.delete("http://127.0.0.1:8000/api/books/"+bookID)
+      //  .then((res)=>{
+      //    console.log(res.data);
+      //    setBook(res.data.data);
+      //    console.log("Books: " + booksProducts);
+      //    setProducts(res.data.data);
+         
+         
+      //  })
+      //  .catch((e)=>{console.log(e);},[booksProducts]);
+    }
     function setToken1(){
       setToken(null);
+      setUser(undefined);
     }
   
 
@@ -113,7 +147,8 @@ function App() {
             books = {booksProducts}
             addToCart = {addToCart}
             removeFromCart = {removeFromCart}
-            
+            deleteBook={deleteBook}
+            user={user}
             />
           }
         />
@@ -126,7 +161,8 @@ function App() {
             <Cart 
             cartProducts={cartProducts} 
             numProducts = {numProducts}
-            token={token}/>
+            token={token}
+            />
           }
         />
 
