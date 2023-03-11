@@ -5,9 +5,9 @@ import '../css/table.css';
 import FormMy from './FormMy';
 import { useState } from 'react';
 import { useEffect } from 'react';
-function Cart({cartProducts,numProducts,token}) {
+function Cart({cartProducts,numProducts,token,user,setCartProduct}) {
  
-  
+
 
   console.log("U korpi: " + numProducts);
   function totalPrice(){
@@ -19,7 +19,9 @@ function Cart({cartProducts,numProducts,token}) {
     return price;
   };
   
-  
+  function emptyTable(){
+      setCartProduct();
+  }
  
   if (cartProducts == null) {
     return (
@@ -38,6 +40,9 @@ function Cart({cartProducts,numProducts,token}) {
             numProducts={numProducts}
             totalPrice = {totalPrice}
             token={token}
+            cartProducts={cartProducts}
+            user = {user}
+            emptyTable = {emptyTable}
            />
       </div>
       </div>
