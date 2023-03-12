@@ -135,6 +135,15 @@ function App() {
       setUser(undefined);
     }
   
+    function setCartProduct(){
+      setCartProducts([]);
+      setNumProducts(0);
+      booksProducts.forEach(book => {
+        if(book.amount>0){
+          book.amount = 0;
+        }
+      });
+    }
 
   return (
     <div className="App">
@@ -163,6 +172,8 @@ function App() {
             cartProducts={cartProducts} 
             numProducts = {numProducts}
             token={token}
+            user = {user}
+            setCartProduct={setCartProduct}
             />
           }
         />

@@ -4,7 +4,8 @@ import jquery from 'jquery'
 import { Form } from 'react-router-dom';
 import '../css/form.css';
 import jsPDF from 'jspdf'
-function FormMy({totalPrice, numProducts,token}) {
+import axios from 'axios';
+function FormMy({totalPrice, numProducts,token,cartProducts,user,emptyTable}) {
 
   console.log(token);
   const[t,setToken] = useState(token);
@@ -17,7 +18,14 @@ function FormMy({totalPrice, numProducts,token}) {
     
     doc.save('demo.pdf')
   }   
-  console.log("Total price je: " + totalPrice);
+
+  const orderBook = {
+    amount:"",
+    user_id:"",
+    book_id:""
+  };
+
+  console.log("Total price je: " + totalPrice());
   jquery(function () {
     $("#form").on("submit", function (e) {
       e.preventDefault();
@@ -27,6 +35,18 @@ function FormMy({totalPrice, numProducts,token}) {
         $("#email").val() &&
         $("#address").val()
       ) {
+        cartProducts.forEach(book => {
+          orderBook.amount = book.amount;
+          orderBook.user_id = user.id;
+          orderBook.book_id = book.id;
+          console.log(orderBook);
+          axios.post("http://127.0.0.1:8000/api/orderedBooks",orderBook)
+       .then((res)=>{
+        console.log(res.data);
+        })
+        .catch((e)=>{ console.log(e);});
+        });
+       
         let data =  "Vasa narudzbina je uspesno primljena!\n<Shipping details>" +
         "\nFirstname: " +
         $("#firstname").val() +
@@ -42,6 +62,7 @@ function FormMy({totalPrice, numProducts,token}) {
         "\nTotal number of products: " +
         numProducts;
         generatePDF(data);
+        emptyTable();
         // alert(
           // "<Shipping details>" +
           //   "\nFirstname: " +

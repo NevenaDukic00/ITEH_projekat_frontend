@@ -20,7 +20,7 @@ function NavBar({ token, flag, setToken }) {
     axios(config)
       .then(function (response) {
         console.log("Izloguj se!");
-
+       setToken(null);
         window.sessionStorage.setItem("auth_token", null);
       })
       .catch(function (error) {

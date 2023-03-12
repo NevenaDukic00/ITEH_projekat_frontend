@@ -20,6 +20,7 @@ function Table({cartProducts}) {
         ordering:  false,
         select: false,
         data: cartProducts,
+        bDestroy: true,
         columns: [
             { data: 'name' },
             { data: 'amount' },
