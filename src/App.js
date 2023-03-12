@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import Addbook from './components/Addbook';
 import Information from './components/Information';
 import {images} from './images/gallery-image';
+import Search from './components/Search';
 import axios from 'axios';
 import MyBooks from './components/MyBooks';
 
@@ -181,8 +182,8 @@ function App() {
         <Route
           path="/"
           element={
-            <Books
-            books = {booksProducts}
+            <Search
+            details = {booksProducts}
             addToCart = {addToCart}
             removeFromCart = {removeFromCart}
             deleteBook={deleteBook}

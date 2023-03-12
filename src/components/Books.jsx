@@ -6,26 +6,23 @@ import { useEffect } from "react";
 import "../css/books.css";
 import { useState } from "react";
 
-function Books({ books, addToCart, removeFromCart,deleteBook,user }) {
-  return (
-    <div className="homepage">
-      {books == null ? (
-        <></>
-      ) : (
-        books.map((book) => (
-          <SingleBook
-            book={book}
-            flag={1}
-            key={book.id}
-            addToCart={addToCart}
-            removeFromCart={removeFromCart}
-            deleteBook={deleteBook}
-            user={user}
-          />
-        ))
-      )}
-    </div>
-  );
+function Books({ books, addToCart, removeFromCart, deleteBook, user }) {
+  const filtered = books.map((book) => (
+    <SingleBook
+      key={book.id}
+      book={book}
+      flag={1}
+      addToCart={addToCart}
+      removeFromCart={removeFromCart}
+      deleteBook={deleteBook}
+      user={user}
+    />
+  ));
+
+  return <div className="homepage">{filtered}</div>;
+  {
+    /* {books == null ? <></> : { filtered }}</div>; */
+  }
 }
 
 export default Books;
