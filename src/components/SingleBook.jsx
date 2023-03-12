@@ -20,6 +20,7 @@ function SingleBook({book,flag,addToCart,removeFromCart,deleteBook,user}) {
       <div className="card-body">
         <h5 className="card-title text-white text-center">{book.name}</h5>
         <p className="card-text text-white">{book.description}</p>
+        <p className="card-text text-white">{book.genre.name_g}</p>
         <div className='p card-text text-white'>
          <div className='price'>Price: {book.price}</div>
         <div className='individualTotal'>Amount: {book.amount}</div>

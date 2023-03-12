@@ -98,10 +98,10 @@ function NavBar({ token, flag, setToken}) {
                   <></>
                 )}
                 {console.log(flag.email + "===" + "admin@gmail.com")}
-                {flag.email === "admin@gmail.com" ? (
+                {flag === 1 || flag.email !== "admin@gmail.com" ? (
                   <li className="nav-item">
-                    <Link className="nav-link" to="/addbook">
-                      Add book
+                    <Link className="nav-link" to="/myBooks">
+                      MyBooks
                     </Link>
                     {/* <a className="nav-link" href="/addbook">Add book</a> */}
                   </li>
