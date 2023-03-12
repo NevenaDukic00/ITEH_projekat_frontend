@@ -4,9 +4,9 @@ import axios from "axios";
 import { Outlet } from "react-router-dom";
 import { useState } from "react";
 
-function NavBar({ token, flag, setToken}) {
+function NavBar({ token, flag, setToken }) {
   const [logout, setLogout] = useState(1);
-  
+
   function handleLogout() {
     var config = {
       method: "post",
@@ -69,9 +69,12 @@ function NavBar({ token, flag, setToken}) {
                   </li>
                 ) : (
                   <li className="nav-item">
-                    <Link className="nav-link" to="#" onClick={handleLogout}> Log out</Link>
+                    <Link className="nav-link" to="#" onClick={handleLogout}>
+                      {" "}
+                      Log out
+                    </Link>
                     {/* <a className="nav-link" href="#" onClick={handleLogout}> */}
-                     
+
                     {/* </a> */}
                   </li>
                 )}
