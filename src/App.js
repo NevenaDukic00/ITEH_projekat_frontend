@@ -12,6 +12,7 @@ import Information from './components/Information';
 import {images} from './images/gallery-image';
 import Search from './components/Search';
 import axios from 'axios';
+import MyBooks from './components/MyBooks';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
   const [numProducts, setNumProducts] = useState(0);
 
   const[booksProducts,setBook] = useState();
+  const[myBooks,setMyBooks] = useState();
  
 
   useEffect(()=>{
@@ -40,17 +42,42 @@ function App() {
        })
        .catch((e)=>{console.log(e);},[booksProducts]);
      }
+    
+     if(token!=null &&myBooks==null){
+      console.log("IDE PO MOJE KNJIGE!");
+      var config = {
+        method: 'get',
+      maxBodyLength: Infinity,
+        url: 'http://127.0.0.1:8000/api/orderedBooks',
+        headers: { 
+          'Authorization': `Bearer ${token}`, 
+          
+        },
+      };
+      
+      axios(config)
+      .then(function (response) {
+        console.log("Response je:");
+        console.log(response.data.data);
+        setMyBooks(response.data.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+     }
    });
   
 
   function addToken(auth_token){
     setToken(auth_token);
+
   }
   
   function addUser(user){
 
     setUser(user);
     console.log("Postalvjamo user");
+    
   }
   
   function refreshCart(){
@@ -133,6 +160,7 @@ function App() {
     function setToken1(){
       setToken(null);
       setUser(undefined);
+      setMyBooks();
     }
   
     function setCartProduct(){
@@ -144,6 +172,7 @@ function App() {
         }
       });
     }
+   
 
   return (
     <div className="App">
@@ -178,7 +207,7 @@ function App() {
           }
         />
 
-       <Route path='/addbook' element={user && <Addbook user = {user}/>}></Route>
+       <Route path='/myBooks' element={ <MyBooks myBooks={myBooks}/>}></Route>
        <Route
           path="/information"
           element={
