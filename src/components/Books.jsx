@@ -7,7 +7,7 @@ import "../css/books.css";
 import { useState } from "react";
 
 function Books({ books, addToCart, removeFromCart, deleteBook, user }) {
-  const filtered = books.map((book) => (
+  const filtered = books?.map((book) => (
     <SingleBook
       key={book.id}
       book={book}
