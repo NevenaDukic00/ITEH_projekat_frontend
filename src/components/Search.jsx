@@ -3,6 +3,8 @@ import Books from "./Books";
 import { useMemo } from "react";
 
 function Search({ details, addToCart, removeFromCart, deleteBook, user }) {
+  console.log("U searchu product je: " + details);
+
   const [state, setState] = useState({
     details: details || [],
     searchField: "",
@@ -23,6 +25,7 @@ function Search({ details, addToCart, removeFromCart, deleteBook, user }) {
   );
 
   function showBooks() {
+   
     return (
       <Books
         books={filteredBooks}

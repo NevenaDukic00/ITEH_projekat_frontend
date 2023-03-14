@@ -7,6 +7,8 @@ import "../css/books.css";
 import { useState } from "react";
 
 function Books({ books, addToCart, removeFromCart, deleteBook, user }) {
+  
+  console.log("Books u centralnoj je: " + books);
   const filtered = books.map((book) => (
     <SingleBook
       key={book.id}

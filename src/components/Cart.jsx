@@ -3,8 +3,7 @@ import React from 'react'
 import Table from './Table';
 import '../css/table.css';
 import FormMy from './FormMy';
-import { useState } from 'react';
-import { useEffect } from 'react';
+
 function Cart({cartProducts,numProducts,token,user,setCartProduct}) {
  
 
