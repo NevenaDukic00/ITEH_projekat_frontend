@@ -8,8 +8,8 @@ import axios from 'axios';
 function FormMy({totalPrice, numProducts,token,cartProducts,user,emptyTable}) {
 
   console.log(token);
-  const[t,setToken] = useState(token);
- 
+  console.log("user je: " + user);
+  
   function generatePDF(data) {
     var doc = new jsPDF('p', 'pt');
     
@@ -93,28 +93,28 @@ function FormMy({totalPrice, numProducts,token,cartProducts,user,emptyTable}) {
       <label htmlFor="firstname">Firstname:</label>
       <input
         type="text"
-        placeholder="Enter firstname"
+        placeholder= {user!==undefined?user.firstName:""}
         name="firstname"
         id="firstname"
-        disabled={t===null? true:false}
+        disabled= "false"
       ></input>
 
       <label htmlFor="lastname">Lastname:</label>
       <input
         type="text"
-        placeholder="Enter lastname"
+        placeholder= {user!==undefined?user.lastName:""}
         name="lastname"
         id="lastname"   
-        disabled={t==null? true:false}
+        disabled="false"
       ></input>
 
       <label htmlFor="email">Email:</label>
       <input
         type="text"
-        placeholder="Enter email"
+        placeholder= {user!==undefined?user.email:""}
         name="email"
         id="email"
-        disabled={t==null? true:false}
+        disabled="false"
       ></input>
 
       <label htmlFor="address">Address:</label>
@@ -123,7 +123,7 @@ function FormMy({totalPrice, numProducts,token,cartProducts,user,emptyTable}) {
         placeholder="Enter address"
         name="address"
         id="address"
-        disabled={t==null? true:false}
+        disabled={token==null? true:false}
       ></input>
       <div className='price'>Total amount: {numProducts}</div>
       <div className='individualTotal'>Total price: {totalPrice()}</div>

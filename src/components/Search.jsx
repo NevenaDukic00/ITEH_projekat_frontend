@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Books from "./Books";
 import { useMemo } from "react";
 
@@ -12,6 +12,7 @@ function Search({ details, addToCart, removeFromCart, deleteBook, user }) {
 
   const handleChange = (e) => {
     setState((prev) => ({ ...prev, searchField: e.target.value }));
+    flag = 0;
   };
 
   const filteredBooks = useMemo(
@@ -19,13 +20,14 @@ function Search({ details, addToCart, removeFromCart, deleteBook, user }) {
       state.details.filter((book) => {
         return book.name
           .toLowerCase()
-          .includes(state.searchField.toLowerCase());
+          .includes(state.searchField?.toLowerCase());
       }),
     [state]
   );
 
+  var flag = -1;
+
   function showBooks() {
-   
     return (
       <Books
         books={filteredBooks}
@@ -35,6 +37,14 @@ function Search({ details, addToCart, removeFromCart, deleteBook, user }) {
         user={user}
       />
     );
+  }
+
+  function handleSort() {
+    const sortedData = [...state.details].sort((a, b) => {
+      return a.price > b.price ? 1 : -1;
+    });
+    flag = 1;
+    setState({ details: sortedData, searchField: "" });
   }
 
   return (
@@ -51,6 +61,9 @@ function Search({ details, addToCart, removeFromCart, deleteBook, user }) {
           placeholder="Search"
           onChange={handleChange}
         />
+        <button onClick={handleSort} style={{ marginLeft: 1200 }}>
+          Sort by price
+        </button>
       </div>
       {showBooks()}
     </section>
