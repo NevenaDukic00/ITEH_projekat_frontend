@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Books from "./Books";
 import { useMemo } from "react";
 
-function Search({ details, addToCart, removeFromCart, deleteBook, user }) {
+function Search({ details, addToCart, removeFromCart, deleteBook, user,updatePrice }) {
   console.log("U searchu product je: " + details);
 
   const [state, setState] = useState({
@@ -35,6 +35,7 @@ function Search({ details, addToCart, removeFromCart, deleteBook, user }) {
         removeFromCart={removeFromCart}
         deleteBook={deleteBook}
         user={user}
+        updatePrice = {updatePrice}
       />
     );
   }
