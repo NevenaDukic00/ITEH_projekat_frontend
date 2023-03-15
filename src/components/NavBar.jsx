@@ -20,7 +20,7 @@ function NavBar({ token, flag, setToken }) {
     axios(config)
       .then(function (response) {
         console.log("Izloguj se!");
-       setToken(null);
+        setToken(null);
         window.sessionStorage.setItem("auth_token", null);
       })
       .catch(function (error) {
@@ -124,6 +124,13 @@ function NavBar({ token, flag, setToken }) {
                 <li className="nav-item">
                   <Link className="nav-link" to="/information">
                     About us
+                  </Link>
+                  {/* <a className="nav-link" href="/cart">Cart</a> */}
+                </li>
+
+                <li className="nav-item">
+                  <Link className="nav-link" to="/converter">
+                    Converter
                   </Link>
                   {/* <a className="nav-link" href="/cart">Cart</a> */}
                 </li>

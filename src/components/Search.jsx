@@ -47,20 +47,26 @@ function Search({ details, addToCart, removeFromCart, deleteBook, user }) {
   }
 
   return (
-    <section className="garamond">
-      <div className="navy georgia ma0 grow">
-        <h5 className="f2" style={{ marginLeft: 10 }}>
-          Search for books that you love!
-        </h5>
+    <section>
+      <div className="main">
+        <h5 style={{ marginLeft: 10 }}>Search for books that you love!</h5>
       </div>
-      <div className="pa2" style={{ marginLeft: 10 }}>
+      <div className="pa2" style={{ display: "flex", marginLeft: 60 }}>
         <input
           className="pa3"
           type="search"
           placeholder="Search"
           onChange={handleChange}
         />
-        <button onClick={handleSort} style={{ marginLeft: 1200 }}>
+        <button
+          onClick={handleSort}
+          style={{
+            marginLeft: 900,
+            width: 150,
+            borderRadius: 5,
+            borderColor: "purple",
+          }}
+        >
           Sort by price
         </button>
       </div>

@@ -11,8 +11,10 @@ import Addbook from './components/Addbook';
 import Information from './components/Information';
 import {images} from './images/gallery-image';
 import Search from './components/Search';
+import Converter from './components/Converter';
 import axios from 'axios';
 import MyBooks from './components/MyBooks';
+import "./App.css";
 
 function App() {
 
@@ -215,7 +217,7 @@ function App() {
             
           }
         />
-       
+       <Route path='/converter' element={ <Converter />}></Route>
       </Routes>
       
     </BrowserRouter>
