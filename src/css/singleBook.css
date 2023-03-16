@@ -37,6 +37,13 @@
   text-align: center;
   
 }
+.discount{
+  display: flex;
+  flex-direction: column;
+  
+  justify-content: center;
+  text-align: center;
+}
 .b {
   background-color: rgb(111, 40, 97);
   color: white;

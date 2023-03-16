@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
 import 'jquery/dist/jquery.min.js';
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
 import $ from 'jquery';
-import { useRef,useEffect } from 'react';
+import { useEffect } from 'react';
 import '../css/table.css';
 
 function MyBooks({myBooks}) {

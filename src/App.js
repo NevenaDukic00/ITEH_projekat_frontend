@@ -26,7 +26,7 @@ function App() {
 
   const[booksProducts,setBook] = useState();
   const[myBooks,setMyBooks] = useState();
- 
+
 
   useEffect(()=>{
     
@@ -67,6 +67,7 @@ function App() {
         console.log(error);
       });
      }
+    
    });
   
 
@@ -175,6 +176,38 @@ function App() {
       });
     }
    
+    
+   function updatePrice(book,newPrice){
+    if(newPrice!=0){
+      var config = {
+        method: 'put',
+        url: 'http://127.0.0.1:8000/api/books/' + book.id,
+        headers: { 
+          'Authorization': `Bearer ${token}`,
+        },
+        data:{price:newPrice + ""}
+      };
+      
+      axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        booksProducts.forEach(book1 => {
+          if(book.id===book1.id){
+  
+            book1.price = newPrice;
+            
+            console.log("Price je: " + book1.price);
+            
+          }
+        });
+
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
+   
+   }
 
   return (
     <div className="App">
@@ -183,13 +216,15 @@ function App() {
       <Routes>
         <Route
           path="/"
+          //ovde sam stavila Books i umesto details = ... books =...
           element={
-            <Search
-            details = {booksProducts}
+            <Books
+            books = {booksProducts}
             addToCart = {addToCart}
             removeFromCart = {removeFromCart}
             deleteBook={deleteBook}
             user={user}
+            updatePrice = {updatePrice}
             />
           }
         />
