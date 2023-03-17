@@ -37,6 +37,8 @@ function App() {
        .then((res)=>{
          console.log(res.data);
          setBook(res.data.data);
+         console.log("res.data " + res.data);
+         console.log("res.data.data " + res.data.data);
          console.log("Books: " + booksProducts);
          setProducts(res.data.data);
          
@@ -208,7 +210,7 @@ function App() {
     }
    
    }
-
+   console.log("iz appa knjige su: "+booksProducts);
   return (
     <div className="App">
       <BrowserRouter className="App">
@@ -218,14 +220,22 @@ function App() {
           path="/"
           //ovde sam stavila Books i umesto details = ... books =...
           element={
-            <Books
-            books = {booksProducts}
+            // <Books
+            // books = {booksProducts}
+            // addToCart = {addToCart}
+            // removeFromCart = {removeFromCart}
+            // deleteBook={deleteBook}
+            // user={user}
+            // updatePrice = {updatePrice}
+            // />
+            <Search 
+            details = {booksProducts}
             addToCart = {addToCart}
             removeFromCart = {removeFromCart}
             deleteBook={deleteBook}
             user={user}
             updatePrice = {updatePrice}
-            />
+            flag={0}/>
           }
         />
         <Route path='/login' element={<Loginpage addToken={addToken} addUser = {addUser}/>}></Route>
