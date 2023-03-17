@@ -27,6 +27,7 @@ function App() {
   const[booksProducts,setBook] = useState();
   const[myBooks,setMyBooks] = useState();
 
+  const[genres,setGenres] = useState();
 
   useEffect(()=>{
     
@@ -62,6 +63,27 @@ function App() {
         console.log("Response je:");
         console.log(response.data.data);
         setMyBooks(response.data.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+     }
+     if(genres==null && user!=undefined && user.email=="admin@gmail.com"){
+      console.log("IDE PO GENROVE!");
+      var config1 = {
+        method: 'get',
+        url: 'http://127.0.0.1:8000/api/genres',
+        headers: { 
+          'Authorization': `Bearer ${token}`, 
+          
+        },
+      };
+      
+      axios(config1)
+      .then(function (response) {
+        console.log(response.data.data);
+        setGenres(response.data.data);
+        console.log("GenresL: " + genres);
       })
       .catch(function (error) {
         console.log(error);
@@ -248,6 +270,12 @@ function App() {
         />
 
        <Route path='/myBooks' element={ <MyBooks myBooks={myBooks}/>}></Route>
+       <Route
+          path="/addBook"
+          element={
+            <Addbook genres = {genres}/>
+          }
+        />
        <Route
           path="/information"
           element={

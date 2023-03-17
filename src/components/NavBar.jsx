@@ -114,7 +114,7 @@ function NavBar({ token, flag, setToken }) {
                 {flag.email === "admin@gmail.com" ? (
                   <li className="nav-item">
                     <Link className="nav-link" to="/addbook">
-                      Update book
+                      Add book
                     </Link>
                     {/* <a className="nav-link" href="/updateBook">Update book</a> */}
                   </li>
