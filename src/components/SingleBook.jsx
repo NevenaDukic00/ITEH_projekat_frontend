@@ -48,9 +48,10 @@ function SingleBook({
                 <p className="card-text text-white">{book.description}</p>
                 {/* <p className="card-text text-white">{book.genre.name_g}</p> */}
                 <div className="p card-text text-white">
-                  <div className="price">Price: {book.price} RSD</div>
-                  <div className="individualTotal">Amount: {book.amount}</div>
-                </div>
+                  <div className="price">Price: {parseFloat(book.price).toFixed(2)}RSD</div>
+                  {user==undefined || (user!=undefined && user.email!=="admin@gmail.com")?
+                  <div className="individualTotal">Amount: {book.amount}</div>:<div></div>
+                }    </div>
               </div>{" "}
             </div>
           ) : (
@@ -59,27 +60,17 @@ function SingleBook({
         </div>
       </div>
 
-      <div className="buttons">
-        {flag === 1 ? (
-          <>
+      <div>
+          
+          {user!=undefined && user.email==="admin@gmail.com"? 
+           <div></div>:<div className="buttons">
             <div className="b" onClick={() => addToCart(book.id)}>
-              <BsPlusLg />
-            </div>
-
-            <div className="b" onClick={() => removeFromCart(book.id)}>
+              <BsPlusLg /></div>
+              <div className="b" onClick={() => removeFromCart(book.id)}>
               <BsDashLg />
-            </div>
-            {user != undefined && user.email === "admin@gmail.com" ? (
-              <div className="b" onClick={() => deleteBook(book.id)}>
-                <BsXCircle />
-              </div>
-            ) : (
-              <></>
-            )}
-          </>
-        ) : (
-          <></>
-        )}
+            </div></div>
+             }
+           
       </div>
       {/* </div> */}
       {/* ); */}
@@ -144,9 +135,14 @@ function SingleBook({
               disabled="false"
             ></input>{" "}
           </div>
+          <div className="buttons">
           <div className="b" onClick={() => updatePrice1(book, newPrice)}>
             <BsPlusLg />
           </div>
+          <div className="b" onClick={() => deleteBook(book.id)}>
+                <BsXCircle />
+              </div>
+              </div>
         </div>
       ) : (
         <></>
