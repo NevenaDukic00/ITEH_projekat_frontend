@@ -122,7 +122,10 @@ function App() {
       booksProducts.forEach((product) => {
         if (product.id === productID) {
           setNumProducts(numProducts - 1);
-          
+          if(product.amount!=0){
+            product.amount--;
+          }
+         
         }
       });
     }
@@ -195,7 +198,7 @@ function App() {
           if(book.id===book1.id){
   
             book1.price = newPrice;
-            
+            setBook(booksProducts.filter((book) => book.price > 0));
             console.log("Price je: " + book1.price);
             
           }
