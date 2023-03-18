@@ -1,31 +1,32 @@
 import React, { useState, useEffect } from "react";
 import Books from "./Books";
-import { useMemo } from "react";
 
-function Search({ details, addToCart, removeFromCart, deleteBook, user,updatePrice }) {
-  console.log("U searchu product je: " + details);
+function Search({
+  details,
+  addToCart,
+  removeFromCart,
+  deleteBook,
+  user,
+  updatePrice,
+  flag,
+}) {
+  console.log("ima li knjiga " + details);
 
-  const [state, setState] = useState({
-    details: details || [],
-    searchField: "",
+  const [searchField, setSearchField] = useState("");
+  const [state, setState] = useState([]);
+
+  useEffect(() => {
+    setState(details || []);
+    console.log("state je:" + state);
+  }, [details]);
+
+  const filteredBooks = state?.filter((book) => {
+    return book.name.toLowerCase().includes(searchField.toLowerCase());
   });
 
   const handleChange = (e) => {
-    setState((prev) => ({ ...prev, searchField: e.target.value }));
-    flag = 0;
+    setSearchField(e.target.value);
   };
-
-  const filteredBooks = useMemo(
-    () =>
-      state.details.filter((book) => {
-        return book.name
-          .toLowerCase()
-          .includes(state.searchField?.toLowerCase());
-      }),
-    [state]
-  );
-
-  var flag = -1;
 
   function showBooks() {
     return (
@@ -35,17 +36,22 @@ function Search({ details, addToCart, removeFromCart, deleteBook, user,updatePri
         removeFromCart={removeFromCart}
         deleteBook={deleteBook}
         user={user}
-        updatePrice = {updatePrice}
+        updatePrice={updatePrice}
       />
     );
   }
 
   function handleSort() {
-    const sortedData = [...state.details].sort((a, b) => {
+    console.log("Usao u sort");
+    console.log("Prosledjeni details: " + details);
+    console.log("Dobijeni state: " + state);
+    const sortedData = [...state].sort((a, b) => {
       return a.price > b.price ? 1 : -1;
     });
+    console.log(sortedData);
     flag = 1;
-    setState({ details: sortedData, searchField: "" });
+    setState(sortedData);
+    console.log("Nakon sorta: " + state);
   }
 
   return (
@@ -72,7 +78,7 @@ function Search({ details, addToCart, removeFromCart, deleteBook, user,updatePri
           Sort by price
         </button>
       </div>
-      {showBooks()}
+      {details == null ? <p>Loading...</p> : showBooks()}
     </section>
   );
 }
