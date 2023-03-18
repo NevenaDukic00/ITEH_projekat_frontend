@@ -29,7 +29,7 @@ function App() {
 
   const[genres,setGenres] = useState();
 
-  useEffect(()=>{
+   useEffect(()=>{
     
     console.log("Books je: " + booksProducts);
      if(booksProducts==null){
@@ -63,6 +63,7 @@ function App() {
         console.log("Response je:");
         console.log(response.data.data);
         setMyBooks(response.data.data);
+      
       })
       .catch(function (error) {
         console.log(error);
