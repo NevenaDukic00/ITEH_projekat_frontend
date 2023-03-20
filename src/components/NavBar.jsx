@@ -121,19 +121,36 @@ function NavBar({ token, flag, setToken }) {
                 ) : (
                   <></>
                 )}
-                <li className="nav-item">
-                  <Link className="nav-link" to="/information">
-                    About us
-                  </Link>
-                  {/* <a className="nav-link" href="/cart">Cart</a> */}
-                </li>
-
-                <li className="nav-item">
-                  <Link className="nav-link" to="/converter">
-                    Converter
-                  </Link>
-                  {/* <a className="nav-link" href="/cart">Cart</a> */}
-                </li>
+                {flag === 1 || flag.email !== "admin@gmail.com" ? (
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/information">
+                      About us
+                    </Link>
+                    {/* <a className="nav-link" href="/cart">Cart</a> */}
+                  </li>
+                ) : (
+                  <></>
+                )}
+                {flag === 1 || flag.email !== "admin@gmail.com" ? (
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/converter">
+                      Converter
+                    </Link>
+                    {/* <a className="nav-link" href="/cart">Cart</a> */}
+                  </li>
+                ) : (
+                  <></>
+                )}
+                {flag.email === "admin@gmail.com" ? (
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/statistics">
+                      Statistics
+                    </Link>
+                    {/* <a className="nav-link" href="/updateBook">Update book</a> */}
+                  </li>
+                ) : (
+                  <></>
+                )}
               </ul>
               {/* <form className="d-flex">
             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"></input>

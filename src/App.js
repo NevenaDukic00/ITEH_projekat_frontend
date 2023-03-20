@@ -14,6 +14,7 @@ import Search from './components/Search';
 import Converter from './components/Converter';
 import axios from 'axios';
 import MyBooks from './components/MyBooks';
+import Statistics from './components/Statistics';
 import "./App.css";
 
 function App() {
@@ -28,6 +29,19 @@ function App() {
   const[myBooks,setMyBooks] = useState();
 
   const[genres,setGenres] = useState();
+
+  const[laguna, setLaguna] = useState(0);
+  const[vulkan, setVulkan] = useState(0);
+  const[lion, setLion] = useState(0);
+  const[other, setOther] = useState(0);
+
+  const[pride, setPride] = useState(0);
+  const[thief, setThief] = useState(0);
+  const[before, setBefore] = useState(0);
+  const[mockingbird, setMockingbird] = useState(0);
+  const[mile, setMile] =useState(0);
+
+  const[revenue, setRevenue]=useState(0);
 
   useEffect(()=>{
     
@@ -108,18 +122,13 @@ function App() {
   }
   
   function refreshCart(){
-   
     setCartProducts(booksProducts.filter((product) => product.amount > 0));
-    
   }
   
   function setProducts(books){
     console.log("Ulazi da doda knjige");
     setBook(books);
     console.log(books);
-    
-    
-    
   }
 
 
@@ -236,6 +245,118 @@ function App() {
    
    }
    console.log("iz appa knjige su: "+booksProducts);
+
+  
+//    function publishers(){
+//     booksProducts.forEach((product) => {
+//       if(product.publisher == "Vulkan")
+//       setLaguna(laguna+1)
+//       if(product.publisher == "Laguna")
+//       setVulkan(vulkan+1)
+//       if(product.publisher == "Lion")
+//       setLion(lion+1)
+
+//       setOther(other+1);
+//     })
+//    }
+
+//    function pubLaguna(){
+//     booksProducts.forEach((product) => {
+//       if(product.publisher == "Laguna")
+//       setLaguna(laguna+1)
+//     })
+//     return laguna;
+//    }
+
+//    function pubVulkan(){
+//     booksProducts.forEach((product) => {
+//       if(product.publisher == "Vulkan")
+//       setVulkan(vulkan+1)
+//     })
+//     console.log(vulkan);
+//     return vulkan;
+//    }
+
+//    function pubLion(){
+//     booksProducts.forEach((product) => {
+//       if(product.publisher == "Lion")
+//       setLion(lion+1)
+//     }
+//     )
+//     return lion;
+//    }
+
+//    function pubOther(){
+//    booksProducts.forEach((product) => {
+//     if(product.publisher !== "Lion" && product.publisher !== "Vulkan" && product.publisher !== "Laguna")
+//     setOther(other+1)
+//   }
+//   )
+//   return other;
+// }
+
+useEffect(() => {
+  let brV=0;
+  let brLa =0;
+  let brLi=0;
+  let brO=0;
+  if(booksProducts!= null){
+  booksProducts.forEach((product) => {
+    if (product.publisher == "Vulkan") {
+      brV =brV+1;
+    }
+    else if (product.publisher == "Laguna") {
+      brLa =brLa+1;
+    }
+    else if (product.publisher == "Lion") {
+      brLi =brLi+1;
+    }
+    else{
+      brO =brO+1;
+    }
+  });
+  setVulkan(brV);
+  setLaguna(brLa);
+  setLion(brLi);
+  setOther(brO);
+}
+}, [booksProducts]);
+
+
+useEffect(()=>{
+  let price=0;
+  let pp=0
+  let bt=0;
+  let hkm =0;
+  let mby =0;
+  let gm=0;
+  cartProducts.forEach((product) => {
+    price = price + product.price*product.amount;
+    if(product.name =="Pride and Prejudice"){
+      pp=pp+product.amount;
+    }
+    else if(product.name =="The Book Thief"){
+      bt =bt+product.amount;
+  }
+    else if(product.name =="How to Kill a Mockingbird"){
+      hkm =hkm+product.amount;
+    }
+    else if(product.name =="Me Before You"){
+      mby = mby+product.amount;
+    }
+    else if(product.name =="The Green Mile"){
+      gm =gm+product.amount;
+    }
+  })
+  setRevenue(price);
+  setPride(pp);
+  setThief(bt);
+  setMockingbird(hkm);
+  setBefore(mby);
+  setMile(gm);
+},[cartProducts]);
+
+
   return (
     <div className="App">
       <BrowserRouter className="App">
@@ -243,16 +364,7 @@ function App() {
       <Routes>
         <Route
           path="/"
-          //ovde sam stavila Books i umesto details = ... books =...
           element={
-            // <Books
-            // books = {booksProducts}
-            // addToCart = {addToCart}
-            // removeFromCart = {removeFromCart}
-            // deleteBook={deleteBook}
-            // user={user}
-            // updatePrice = {updatePrice}
-            // />
             <Search 
             details = {booksProducts}
             addToCart = {addToCart}
@@ -294,6 +406,7 @@ function App() {
           }
         />
        <Route path='/converter' element={ <Converter />}></Route>
+       <Route path='/statistics' element={ <Statistics  vulkan={vulkan} laguna={laguna} lion ={lion} other ={other} revenue={revenue} pride={pride} thief={thief} mockingbird = {mockingbird} before ={before} mile={mile}/>}></Route>
       </Routes>
       
     </BrowserRouter>
