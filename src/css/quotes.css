@@ -1,0 +1,50 @@
+
+.card{
+    background: linear-gradient(90deg, rgb(149, 74, 123) 0%, rgb(116, 58, 113) 25%, rgb(126, 38, 101) 35%, rgb(173, 132, 171) 49%, rgb(208, 125, 215) 81%, rgb(139, 52, 112) 100%);
+    margin-top: 100px;
+    margin-left: 50%;
+}
+.container{
+    position: absolute;
+    background-color: rgb(235, 157, 222);
+    width: 500px;
+    margin-top: 100px;
+    margin-left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2em;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.quoteButton{
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button{
+    width: 100px;
+    background-color: rgb(168, 247, 220);
+    border-radius: 28px 28px 28px 28px;
+    border: 1px solid rgb(49, 228, 165);
+    display: inline-block;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+button:hover{
+    background-color: rgb(52, 82, 82);
+}
+
+button:active{
+    position:relative;
+    top:1px;
+}
+
+.quote{
+    margin: 1em;
+}
+
+.author{
+    float: right;
+    margin: 1em;
+}

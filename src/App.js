@@ -15,6 +15,7 @@ import Converter from './components/Converter';
 import axios from 'axios';
 import MyBooks from './components/MyBooks';
 import Statistics from './components/Statistics';
+import Quote from './components/Quote';
 import "./App.css";
 
 function App() {
@@ -407,6 +408,7 @@ useEffect(()=>{
         />
        <Route path='/converter' element={ <Converter />}></Route>
        <Route path='/statistics' element={ <Statistics  vulkan={vulkan} laguna={laguna} lion ={lion} other ={other} revenue={revenue} pride={pride} thief={thief} mockingbird = {mockingbird} before ={before} mile={mile}/>}></Route>
+       <Route path='/randomQuote' element={ <Quote />}></Route>
       </Routes>
       
     </BrowserRouter>

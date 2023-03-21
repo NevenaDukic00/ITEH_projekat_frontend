@@ -151,6 +151,16 @@ function NavBar({ token, flag, setToken }) {
                 ) : (
                   <></>
                 )}
+                {flag === 1 || flag.email !== "admin@gmail.com" ? (
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/randomQuote">
+                      Random Quote
+                    </Link>
+                    {/* <a className="nav-link" href="/cart">Cart</a> */}
+                  </li>
+                ) : (
+                  <></>
+                )}
               </ul>
               {/* <form className="d-flex">
             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"></input>
