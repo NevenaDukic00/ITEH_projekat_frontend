@@ -32,8 +32,8 @@ function Quote() {
   return (
     <div className="look">
       <h1>Random quotes to inspire you to read a new book ;)</h1>
-      <div className="card">
-        <div className="container">
+      <div className="card1">
+        <div className="container1">
           <div className="quoteButton">
             <button className="button" onClick={quoteAPI}>
               New quote

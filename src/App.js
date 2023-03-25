@@ -63,7 +63,7 @@ function App() {
        .catch((e)=>{console.log(e);},[booksProducts]);
      }
     
-     if(token!=null &&myBooks==null){
+     if(token!=null && myBooks==null){
       console.log("IDE PO MOJE KNJIGE!");
       var config = {
         method: 'get',
@@ -85,29 +85,30 @@ function App() {
         console.log(error);
       });
      }
-     if(genres==null && user!=undefined && user.email=="admin@gmail.com"){
-      console.log("IDE PO GENROVE!");
-      var config1 = {
-        method: 'get',
-        url: 'http://127.0.0.1:8000/api/genres',
-        headers: { 
-          'Authorization': `Bearer ${token}`, 
+
+     
+    //   var config1 = {
+    //     method: 'get',
+    //     maxBodyLength: Infinity,
+    //     url: 'http://127.0.0.1:8000/api/genres',
+    //     headers: { 
+    //       'Authorization': `Bearer ${token}`, 
           
-        },
-      };
+    //     },
+    //   };
       
-      axios(config1)
-      .then(function (response) {
-        console.log(response.data.data);
-        setGenres(response.data.data);
-        console.log("GenresL: " + genres);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-     }
-    
-   });
+    //   axios(config1)
+    //   .then(function (response) {
+    //     console.log("Response zanrova je " + response.data.data);
+    //     setGenres(response.data.data);
+    //     console.log("GenresL: " + genres);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   },[genres]);
+    //  }
+    // console.log("App salje zanrove a to su: "+ genres);
+  });
   
 
   function addToken(auth_token){
@@ -133,7 +134,7 @@ function App() {
   }
 
 
-    function addToCart(id) {
+  function addToCart(id) {
       booksProducts.forEach((product) => {
         if (product.id === id) {
           console.log("U korpi ove knjge: " + product.amount);
@@ -150,9 +151,9 @@ function App() {
          
         }
     });
-    }
+  }
   
-    function removeFromCart(productID) {
+  function removeFromCart(productID) {
       booksProducts.forEach((product) => {
         if (product.id === productID) {
           setNumProducts(numProducts - 1);
@@ -162,9 +163,9 @@ function App() {
          
         }
       });
-    }
+  }
 
-    function deleteBook(bookID){
+  function deleteBook(bookID){
       var config = {
         method: 'delete',
       maxBodyLength: Infinity,
@@ -196,14 +197,14 @@ function App() {
          
       //  })
       //  .catch((e)=>{console.log(e);},[booksProducts]);
-    }
-    function setToken1(){
+  }
+  function setToken1(){
       setToken(null);
       setUser(undefined);
       setMyBooks();
-    }
+  }
   
-    function setCartProduct(){
+ function setCartProduct(){
       setCartProducts([]);
       setNumProducts(0);
       booksProducts.forEach(book => {
@@ -211,10 +212,10 @@ function App() {
           book.amount = 0;
         }
       });
-    }
+  }
    
     
-   function updatePrice(book,newPrice){
+  function updatePrice(book,newPrice){
     if(newPrice!=0){
       var config = {
         method: 'put',
@@ -244,9 +245,46 @@ function App() {
       });
     }
    
-   }
+  }
    console.log("iz appa knjige su: "+booksProducts);
 
+   //genres==[]  && user!=undefined
+  useEffect(()=>{
+    if(genres == null && user.email=="admin@gmail.com"){
+      console.log("IDE PO GENROVE!");
+      var config1 = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: 'http://127.0.0.1:8000/api/genres',
+            headers: { 
+              'Authorization': `Bearer ${token}`, 
+              
+            },
+      };
+          
+      axios(config1).then(function (response) {
+            console.log("Response zanrova je " + response.data.data);
+            setGenres(response.data.data);
+
+            console.log("GenresL: " + genres);
+          })
+          .catch(function (error) {
+            console.log(error);
+          },[genres]);
+      }
+        console.log("App salje zanrove a to su: "+ genres);
+    //   axios.get("http://127.0.0.1:8000/api/genres")
+    //   .then((response)=>{
+    //    console.log("Response zanrova je " + response.data.data);
+    //    setGenres(response.data.data);
+    //   })
+    //   .catch((err)=>{
+    //    console.log(err);
+    //   });
+    //  }
+  });
+   
+  console.log("Iz glavnog zanrovi su: "+ genres);
   
 //    function publishers(){
 //     booksProducts.forEach((product) => {

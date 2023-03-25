@@ -1,10 +1,10 @@
 
-.card{
+.card1{
     background: linear-gradient(90deg, rgb(149, 74, 123) 0%, rgb(116, 58, 113) 25%, rgb(126, 38, 101) 35%, rgb(173, 132, 171) 49%, rgb(208, 125, 215) 81%, rgb(139, 52, 112) 100%);
     margin-top: 100px;
-    margin-left: 50%;
+    margin-left: 35px;
 }
-.container{
+.container1{
     position: absolute;
     background-color: rgb(235, 157, 222);
     width: 500px;
