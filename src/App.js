@@ -272,7 +272,7 @@ function App() {
             console.log(error);
           },[genres]);
       }
-        console.log("App salje zanrove a to su: "+ genres);
+        console.log("App salje zanrove a to su: ", genres);
     //   axios.get("http://127.0.0.1:8000/api/genres")
     //   .then((response)=>{
     //    console.log("Response zanrova je " + response.data.data);

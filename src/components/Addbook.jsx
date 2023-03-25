@@ -18,11 +18,11 @@ function Addbook({ genres }) {
 
   useEffect(() => {
     const newGenres = [];
-    console.log("U Addbook genres su : " + genres);
+    console.log("U Addbook genres su : ", genres);
     console.log("ULAZI DA PUNI LISTU");
     genres.forEach((u) => {
       newGenres.push({
-        label: u.name,
+        label: u.name_g,
         value: u.id,
       });
     });
@@ -96,7 +96,7 @@ function Addbook({ genres }) {
               <option value="select genre">Select genre</option>
               {genre.map((g) => (
                 <option key={g.value} value={g.value}>
-                  {g.label}
+                  {g.value} {g.label}
                 </option>
               ))}
             </select>
