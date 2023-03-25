@@ -64,7 +64,7 @@ function App() {
       .then(function (response) {
         console.log("Response je:");
         console.log(response.data.data);
-        setMyBooks(response.data.data);
+        setMyBooks(response.data.data.filter((product) => product.book != null));
       
       })
       .catch(function (error) {
