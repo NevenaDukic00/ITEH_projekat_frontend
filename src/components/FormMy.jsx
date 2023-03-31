@@ -29,11 +29,13 @@ function FormMy({totalPrice, numProducts,token,cartProducts,user,emptyTable}) {
   jquery(function () {
     $("#form").on("submit", function (e) {
       e.preventDefault();
+      console.log("Ukupna cena je: " + totalPrice());
+      if(totalPrice()==0){
+
+        return;
+      }
       if (
-        $("#firstname").val() &&
-        $("#lastname").val() &&
-        $("#email").val() &&
-        $("#address").val()
+        $("#address").val() 
       ) {
         cartProducts.forEach(book => {
           orderBook.amount = book.amount;
@@ -49,11 +51,11 @@ function FormMy({totalPrice, numProducts,token,cartProducts,user,emptyTable}) {
        
         let data =  "Vasa narudzbina je uspesno primljena!\n<Shipping details>" +
         "\nFirstname: " +
-        $("#firstname").val() +
+        user.firstName +
         "\nLastname: " +
-        $("#lastname").val() +
+        user.lastName +
         "\nEmail: " +
-        $("#email").val() +
+        user.email +
         "\nAddress: " +
         $("#address").val() +
         "\nTotal price: " +
@@ -79,7 +81,7 @@ function FormMy({totalPrice, numProducts,token,cartProducts,user,emptyTable}) {
           //   "\nTotal number of products: " +
           //   numProducts
         // );
-      } else {
+      } else if( !$("#address").val()){
         alert("All fields are required!");
       }
     });

@@ -24,7 +24,7 @@ function MyBooks({myBooks}) {
             { data: 'book.name' },
             { data: 'amount' },
             { data: 'book.price' },
-            { data: 'date' },
+            { data: 'date'},
            
         ],
     });

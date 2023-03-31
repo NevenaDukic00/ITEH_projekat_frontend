@@ -1,0 +1,29 @@
+h3{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center; 
+}
+
+.lineChart{
+    height:500px;
+    width: 80%;
+    background-color: antiquewhite;
+    margin-left: 10%;
+    margin-bottom: 10px;
+}
+
+.pieChart{
+    height:500px;
+    width: 35%;
+    background-color: antiquewhite;
+    margin-left: 33%;
+    margin-bottom: 10px;
+}
+
+.barChart{
+    height:500px;
+    width: 80%;
+    background-color: antiquewhite;
+    margin-left: 10%;
+    margin-bottom: 10px;
+}

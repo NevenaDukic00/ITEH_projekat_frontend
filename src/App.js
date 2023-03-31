@@ -14,6 +14,8 @@ import Search from './components/Search';
 import Converter from './components/Converter';
 import axios from 'axios';
 import MyBooks from './components/MyBooks';
+import Statistics from './components/Statistics';
+import Quote from './components/Quote';
 import "./App.css";
 
 function App() {
@@ -29,7 +31,20 @@ function App() {
 
   const[genres,setGenres] = useState();
 
-   useEffect(()=>{
+  const[laguna, setLaguna] = useState(0);
+  const[vulkan, setVulkan] = useState(0);
+  const[lion, setLion] = useState(0);
+  const[other, setOther] = useState(0);
+
+  const[pride, setPride] = useState(0);
+  const[thief, setThief] = useState(0);
+  const[before, setBefore] = useState(0);
+  const[mockingbird, setMockingbird] = useState(0);
+  const[mile, setMile] =useState(0);
+
+  const[revenue, setRevenue]=useState(0);
+
+  useEffect(()=>{
     
     console.log("Books je: " + booksProducts);
      if(booksProducts==null){
@@ -48,7 +63,7 @@ function App() {
        .catch((e)=>{console.log(e);},[booksProducts]);
      }
     
-     if(token!=null &&myBooks==null){
+     if(token!=null && myBooks==null){
       console.log("IDE PO MOJE KNJIGE!");
       var config = {
         method: 'get',
@@ -71,29 +86,30 @@ function App() {
         console.log(error);
       });
      }
-     if(genres==null && user!=undefined && user.email=="admin@gmail.com"){
-      console.log("IDE PO GENROVE!");
-      var config1 = {
-        method: 'get',
-        url: 'http://127.0.0.1:8000/api/genres',
-        headers: { 
-          'Authorization': `Bearer ${token}`, 
+
+     
+    //   var config1 = {
+    //     method: 'get',
+    //     maxBodyLength: Infinity,
+    //     url: 'http://127.0.0.1:8000/api/genres',
+    //     headers: { 
+    //       'Authorization': `Bearer ${token}`, 
           
-        },
-      };
+    //     },
+    //   };
       
-      axios(config1)
-      .then(function (response) {
-        console.log(response.data.data);
-        setGenres(response.data.data);
-        console.log("GenresL: " + genres);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-     }
-    
-   });
+    //   axios(config1)
+    //   .then(function (response) {
+    //     console.log("Response zanrova je " + response.data.data);
+    //     setGenres(response.data.data);
+    //     console.log("GenresL: " + genres);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   },[genres]);
+    //  }
+    // console.log("App salje zanrove a to su: "+ genres);
+  });
   
 
   function addToken(auth_token){
@@ -109,22 +125,17 @@ function App() {
   }
   
   function refreshCart(){
-   
     setCartProducts(booksProducts.filter((product) => product.amount > 0));
-    
   }
   
   function setProducts(books){
     console.log("Ulazi da doda knjige");
     setBook(books);
     console.log(books);
-    
-    
-    
   }
 
 
-    function addToCart(id) {
+  function addToCart(id) {
       booksProducts.forEach((product) => {
         if (product.id === id) {
           console.log("U korpi ove knjge: " + product.amount);
@@ -141,9 +152,9 @@ function App() {
          
         }
     });
-    }
+  }
   
-    function removeFromCart(productID) {
+  function removeFromCart(productID) {
       booksProducts.forEach((product) => {
         if (product.id === productID) {
           setNumProducts(numProducts - 1);
@@ -153,9 +164,9 @@ function App() {
          
         }
       });
-    }
+  }
 
-    function deleteBook(bookID){
+  function deleteBook(bookID){
       var config = {
         method: 'delete',
       maxBodyLength: Infinity,
@@ -187,14 +198,15 @@ function App() {
          
       //  })
       //  .catch((e)=>{console.log(e);},[booksProducts]);
-    }
-    function setToken1(){
+  }
+  function setToken1(){
       setToken(null);
       setUser(undefined);
       setMyBooks();
-    }
+      setCartProduct();
+  }
   
-    function setCartProduct(){
+ function setCartProduct(){
       setCartProducts([]);
       setNumProducts(0);
       booksProducts.forEach(book => {
@@ -202,10 +214,10 @@ function App() {
           book.amount = 0;
         }
       });
-    }
+  }
    
     
-   function updatePrice(book,newPrice){
+  function updatePrice(book,newPrice){
     if(newPrice!=0){
       var config = {
         method: 'put',
@@ -235,8 +247,157 @@ function App() {
       });
     }
    
-   }
+  }
    console.log("iz appa knjige su: "+booksProducts);
+
+   //genres==[]  && user!=undefined
+  useEffect(()=>{
+    if(genres == null && user!==undefined && user.email=="admin@gmail.com"){
+      console.log("IDE PO GENROVE!");
+      var config1 = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: 'http://127.0.0.1:8000/api/genres',
+            headers: { 
+              'Authorization': `Bearer ${token}`, 
+              
+            },
+      };
+          
+      axios(config1).then(function (response) {
+            console.log("Response zanrova je " + response.data.data);
+            setGenres(response.data.data);
+
+            console.log("GenresL: " + genres);
+          })
+          .catch(function (error) {
+            console.log(error);
+          },[genres]);
+      }
+        console.log("App salje zanrove a to su: ", genres);
+    //   axios.get("http://127.0.0.1:8000/api/genres")
+    //   .then((response)=>{
+    //    console.log("Response zanrova je " + response.data.data);
+    //    setGenres(response.data.data);
+    //   })
+    //   .catch((err)=>{
+    //    console.log(err);
+    //   });
+    //  }
+  });
+   
+  console.log("Iz glavnog zanrovi su: "+ genres);
+  
+//    function publishers(){
+//     booksProducts.forEach((product) => {
+//       if(product.publisher == "Vulkan")
+//       setLaguna(laguna+1)
+//       if(product.publisher == "Laguna")
+//       setVulkan(vulkan+1)
+//       if(product.publisher == "Lion")
+//       setLion(lion+1)
+
+//       setOther(other+1);
+//     })
+//    }
+
+//    function pubLaguna(){
+//     booksProducts.forEach((product) => {
+//       if(product.publisher == "Laguna")
+//       setLaguna(laguna+1)
+//     })
+//     return laguna;
+//    }
+
+//    function pubVulkan(){
+//     booksProducts.forEach((product) => {
+//       if(product.publisher == "Vulkan")
+//       setVulkan(vulkan+1)
+//     })
+//     console.log(vulkan);
+//     return vulkan;
+//    }
+
+//    function pubLion(){
+//     booksProducts.forEach((product) => {
+//       if(product.publisher == "Lion")
+//       setLion(lion+1)
+//     }
+//     )
+//     return lion;
+//    }
+
+//    function pubOther(){
+//    booksProducts.forEach((product) => {
+//     if(product.publisher !== "Lion" && product.publisher !== "Vulkan" && product.publisher !== "Laguna")
+//     setOther(other+1)
+//   }
+//   )
+//   return other;
+// }
+
+useEffect(() => {
+  let brV=0;
+  let brLa =0;
+  let brLi=0;
+  let brO=0;
+  if(booksProducts!= null){
+  booksProducts.forEach((product) => {
+    if (product.publisher == "Vulkan") {
+      brV =brV+1;
+    }
+    else if (product.publisher == "Laguna") {
+      brLa =brLa+1;
+    }
+    else if (product.publisher == "Lion") {
+      brLi =brLi+1;
+    }
+    else{
+      brO =brO+1;
+    }
+  });
+  setVulkan(brV);
+  setLaguna(brLa);
+  setLion(brLi);
+  setOther(brO);
+}
+}, [booksProducts]);
+
+
+useEffect(()=>{
+  let price=0;
+  let pp=0
+  let bt=0;
+  let hkm =0;
+  let mby =0;
+  let gm=0;
+  cartProducts.forEach((product) => {
+    price = price + product.price*product.amount;
+    if(product.name =="Pride and Prejudice"){
+      pp=pp+product.amount;
+    }
+    else if(product.name =="The Book Thief"){
+      bt =bt+product.amount;
+  }
+    else if(product.name =="How to Kill a Mockingbird"){
+      hkm =hkm+product.amount;
+    }
+    else if(product.name =="Me Before You"){
+      mby = mby+product.amount;
+    }
+    else if(product.name =="The Green Mile"){
+      gm =gm+product.amount;
+    }
+  })
+  setRevenue(price);
+  setPride(pp);
+  setThief(bt);
+  setMockingbird(hkm);
+  setBefore(mby);
+  setMile(gm);
+},[cartProducts]);
+
+
   return (
     <div className="App">
       <BrowserRouter className="App">
@@ -244,16 +405,7 @@ function App() {
       <Routes>
         <Route
           path="/"
-          //ovde sam stavila Books i umesto details = ... books =...
           element={
-            // <Books
-            // books = {booksProducts}
-            // addToCart = {addToCart}
-            // removeFromCart = {removeFromCart}
-            // deleteBook={deleteBook}
-            // user={user}
-            // updatePrice = {updatePrice}
-            // />
             <Search 
             details = {booksProducts}
             addToCart = {addToCart}
@@ -295,6 +447,8 @@ function App() {
           }
         />
        <Route path='/converter' element={ <Converter />}></Route>
+       <Route path='/statistics' element={ <Statistics  vulkan={vulkan} laguna={laguna} lion ={lion} other ={other} revenue={revenue} pride={pride} thief={thief} mockingbird = {mockingbird} before ={before} mile={mile}/>}></Route>
+       <Route path='/randomQuote' element={ <Quote />}></Route>
       </Routes>
       
     </BrowserRouter>

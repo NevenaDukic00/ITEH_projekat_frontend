@@ -38,8 +38,22 @@ function Information({ items }) {
       <br />
       {showGallery(items)}
       <section id="mu-map">
-        <div class="mapouter">
-          <div class="gmap_canvas">
+        <div
+          class="mapouter"
+          style={{
+            position: "relative",
+            textAlign: center,
+            height: 100,
+            width: 100,
+          }}
+        >
+          <div
+            class="gmap_canvas"
+            style={{
+              height: 100,
+              width: 100,
+            }}
+          >
             <iframe
               width="100%"
               height="100%"

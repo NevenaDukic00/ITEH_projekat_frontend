@@ -36,6 +36,7 @@ function SingleBook({
             <img
               src={book.url}
               className="img-fluid w-100"
+              aria-hidden
               alt="card-horizontal-image"
             />
           </div>
@@ -46,6 +47,7 @@ function SingleBook({
                   {book.name}
                 </h5>
                 <p className="card-text text-white">{book.description}</p>
+                <p className="card-text text-white">Genre: {book.genre.name_g}</p>
                 {/* <p className="card-text text-white">{book.genre.name_g}</p> */}
                 <div className="p card-text text-white">
                   <div className="price">Price: {parseFloat(book.price).toFixed(2)}RSD</div>
