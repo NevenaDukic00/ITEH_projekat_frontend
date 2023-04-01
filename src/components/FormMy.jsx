@@ -21,7 +21,7 @@ function FormMy({totalPrice, numProducts,token,cartProducts,user,emptyTable}) {
 
   const orderBook = {
     amount:"",
-    user_id:"",
+   // user_id:"",
     book_id:""
   };
 
@@ -39,12 +39,24 @@ function FormMy({totalPrice, numProducts,token,cartProducts,user,emptyTable}) {
       ) {
         cartProducts.forEach(book => {
           orderBook.amount = book.amount;
-          orderBook.user_id = user.id;
+          //orderBook.user_id = user.id;
           orderBook.book_id = book.id;
-          console.log(orderBook);
-          axios.post("http://127.0.0.1:8000/api/orderedBooks",orderBook)
+          console.log("Narucuje se: " + orderBook);
+          console.log("IDE PO MOJE KNJIGE!");
+        var config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: "http://127.0.0.1:8000/api/orderedBooks",
+        headers: { 
+          'Authorization': `Bearer ${token}`, 
+          
+        },
+        data: orderBook
+      };
+         // axios.post("http://127.0.0.1:8000/api/orderedBooks",orderBook)
+         axios(config)
        .then((res)=>{
-        console.log(res.data);
+        console.log("Primljena narudzbina: " + res.data);
         })
         .catch((e)=>{ console.log(e);});
         });
